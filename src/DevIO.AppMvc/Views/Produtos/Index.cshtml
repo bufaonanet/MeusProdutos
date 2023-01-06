@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DevIO.AppMvc.ViewModels.ProdutoViewModel>
+
+@{
+    ViewBag.Title = "Lista de Produtos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a class="btn btn-info" href="@Url.Action("Create","Produtos")">
+        Novo Produto
+    </a>
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fornecedor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
+            </td>
+            <td>
+                @item.Valor.ToString("C")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativo)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-warning" href="@Url.Action("Details", "Produtos", new {id = item.Id})"><spam class="glyphicon glyphicon-search"></spam></a>
+                <a class="btn btn-info" href="@Url.Action("Edit", "Produtos", new {id = item.Id})"><spam class="glyphicon glyphicon-pencil"></spam></a>
+                <a class="btn btn-danger" href="@Url.Action("Delete", "Produtos", new {id = item.Id})"><spam class="glyphicon glyphicon-trash"></spam></a>
+            </td>
+        </tr>
+    }
+</table>
